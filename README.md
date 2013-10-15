@@ -1,3 +1,3 @@
 # GhostScroll
- All you need is here:
- http://ghost-grmmph.rhcloud.com/
+All you need is here:
+http://ghostscroll.grmmph.com/
