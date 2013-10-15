@@ -1,0 +1,60 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+{{! The big featured header on the homepage, with the site logo and description }}
+<header id="site-head" {{#if @blog.cover}}style="background-image: url({{@blog.cover}})"{{/if}}>
+    <div class="vertical">
+        <div id="site-head-content" class="inner">
+
+            {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}}
+            <h1 class="blog-title">{{@blog.title}}</h1>
+            <h2 class="blog-description">{{@blog.description}}</h2>
+
+            <a class='btn first'>Take a tour</a>
+            <a class='btn last'>Cut to the chase</a><br>
+            <i id='header-arrow' class="icon-angle-down"></i>
+        </div>
+    </div>
+
+</header>
+
+{{! The main content area on the homepage }}
+<main class="content" role="main">
+
+    <div class='fixed-nav'>
+    </div>
+
+    {{! Each post will be output using this markup }}
+    {{#foreach posts}}
+    <div class='post-holder'>
+        
+            {{#if @first}}
+                <article class="{{post_class}} first">
+            {{else}}
+                {{#if @last}}
+                    <article class="{{post_class}} last">
+                {{else}}
+                    <article class="{{post_class}}">
+                {{/if}}
+            {{/if}}
+        
+            <header class="post-header">
+                
+                <h2 class="post-title">{{{title}}}</h2>
+
+            </header>
+            <section class="post-content">
+                <p>{{content characters="9999999999999"}}</p>
+            </section>
+        </article>
+        <div class='post-after'></div>
+    </div>
+
+    {{/foreach}}
+
+    {{!! After all the posts, we have the previous/next pagination links }}
+    
+
+</main>
