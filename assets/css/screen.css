@@ -303,7 +303,7 @@ code, tt {
     padding: 3px 5px;
     font-family: Inconsolata, monospace, sans-serif;
     font-size: 0.75em;
-    white-space: pre;
+    /*white-space: pre;*/
     border: 1px solid #E3EDF3;
     background: #F7FAFB;
     border-radius: 2px;
