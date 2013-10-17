@@ -780,13 +780,12 @@ a.fn-item.active {
     position: relative;
     margin: 0rem 0 0 0;
     padding: 1rem 0;
-    border-top: #EBF2F6 1px solid;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.3rem;
     line-height: 1.5em;
     color: #BBC7CC;
     text-align: center;
-    background: #F7FAFB;
+    background: #22343A;
 }
 
 .site-footer a {
