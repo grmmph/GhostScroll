@@ -446,7 +446,7 @@ li {
     text-align: center;
     color: #fff;
     background: rgb(0, 153, 204) no-repeat center center;
-    background-size: 100%;
+    background-size: cover;
 }
 
 #site-head:after {
