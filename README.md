@@ -14,6 +14,6 @@ The thing is that I don't have the time to work on this alone. So if you have th
 * Create a color scheme picker plugin. (can be a ghost plugin or en external code generator).
 * Easier markup for FontAwesome (instead of `<i class="icon-rocket icon-4x"></i>`, make something like `$!rocket-big`).
 
-### Some experimental thought
+### Some experimental thoughts
 Maybe it will be interesting to take ghost source code and modify it a bit to fit this single-page purpose. Anyone interested?
 
