@@ -17,5 +17,6 @@ The thing is that I don't have the time to work on this alone. So if you have th
 ### Some experimental thoughts
 Maybe it will be interesting to take ghost source code and modify it a bit to fit this single-page purpose. Anyone interested?
 
+
 P.S.
 To make development workflow even faster, I have GhostScroll's git also here: https://codio.com/grmmph/GhostScroll
