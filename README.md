@@ -1,6 +1,6 @@
 # GhostScroll
 All you need is here:
-http://ghostscroll.grmmph.com/
+http://grmmph.com/ghostscroll/
 
 ## Call for contributions 
 What's started as a small project of mine seems to grab more attention than expected. So why not totally open it for further development.
