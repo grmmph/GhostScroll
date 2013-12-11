@@ -48,12 +48,13 @@ var $post = $('.post'),
         })
 
         $('.post-title').each(function () {
-        	var t = $(this).text();
-        	$fnav.append("<a class='fn-item' item='"+t+"'>"+t+"</a>")
+        	var t = $(this).text(),
+        	    index = $(this).parents('.post-holder').index();
+        	$fnav.append("<a class='fn-item' item_index='"+index+"'>"+t+"</a>")
 
         	$('.fn-item').click(function () {
-        		var i = $(this).attr('item'),
-        			s = $(".post[item='"+i+"']")
+        		var i = $(this).attr('item_index'),
+        			s = $(".post[item_index='"+i+"']")
 
         		$('html, body').animate({
 					scrollTop: s.offset().top
@@ -78,11 +79,11 @@ var $post = $('.post'),
         	$post.each(function () {
         		var f = $(this).offset().top,
         			b = $(this).offset().top + $(this).height(),
-        		 	t = $(this).find('.post-title').text(),
-        		 	i = $(".fn-item[item='"+t+"']"),
+        			t = $(this).parent('.post-holder').index(),
+        		 	i = $(".fn-item[item_index='"+t+"']"),
         		 	a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
 
-        		 $(this).attr('item', t)
+        		 $(this).attr('item_index', t);
 
         		if(w >= f && w<=b) {
 
