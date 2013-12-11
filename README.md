@@ -5,7 +5,7 @@ http://ghostscroll.grmmph.com/
 ## Call for contributions 
 What's started as a small project of mine seems to grab more attention than expected. So why not totally open it for further development.
 
-I have in mind few features that would be nice to have on GhostScroll which are listed below, but if anyone have any more ideas for improvements, please file and issue and I'll add them here here.
+I have in mind few features that would be nice to have on GhostScroll which are listed below, but if anyone have any more ideas for improvements, please file and issue and I'll add them here.
 
 The thing is that I don't have the time to work on this alone. So if you have the time and feel like contributing and working on the to do list, you will have my gratitude and of course eternal fame and glory for all times.
 
