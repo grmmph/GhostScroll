@@ -12,7 +12,6 @@ The thing is that I don't have the time to work on this alone. So if you have th
 ### To do list
 * Add scrolling parallax feature for the header image.
 * Create a color scheme picker plugin. (can be a ghost plugin or en external code generator).
-* Easier markup for FontAwesome (instead of `<i class="icon-rocket icon-4x"></i>`, make something like `$!rocket-big`).
 
 ### Some experimental thoughts
 Maybe it will be interesting to take ghost source code and modify it a bit to fit this single-page purpose. Anyone interested?
