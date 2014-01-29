@@ -101,7 +101,6 @@ var $post = $('.post'),
 
     });
 
-<<<<<<< HEAD
     $post.each(function () {
         var postText = $(this).html();
         var fa  = [];
@@ -122,6 +121,4 @@ var $post = $('.post'),
     })
     
 
-=======
->>>>>>> 0005836bc7fa383db97419a401e1e2f61c057bce
 }(jQuery));
