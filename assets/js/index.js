@@ -1,5 +1,5 @@
 /**
- * Main JS file for Casper behaviours
+ * Main JS file for GhostScroll behaviours
  */
 var $post = $('.post'), 
 	$first = $('.post.first'), 
@@ -48,12 +48,13 @@ var $post = $('.post'),
         })
 
         $('.post-title').each(function () {
-        	var t = $(this).text();
-        	$fnav.append("<a class='fn-item' item='"+t+"'>"+t+"</a>")
+        	var t = $(this).text(),
+        	    index = $(this).parents('.post-holder').index();
+        	$fnav.append("<a class='fn-item' item_index='"+index+"'>"+t+"</a>")
 
         	$('.fn-item').click(function () {
-        		var i = $(this).attr('item'),
-        			s = $(".post[item='"+i+"']")
+        		var i = $(this).attr('item_index'),
+        			s = $(".post[item_index='"+i+"']")
 
         		$('html, body').animate({
 					scrollTop: s.offset().top
@@ -78,11 +79,11 @@ var $post = $('.post'),
         	$post.each(function () {
         		var f = $(this).offset().top,
         			b = $(this).offset().top + $(this).height(),
-        		 	t = $(this).find('.post-title').text(),
-        		 	i = $(".fn-item[item='"+t+"']"),
+        			t = $(this).parent('.post-holder').index(),
+        		 	i = $(".fn-item[item_index='"+t+"']"),
         		 	a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
 
-        		 $(this).attr('item', t)
+        		 $(this).attr('item_index', t);
 
         		if(w >= f && w<=b) {
 
@@ -99,5 +100,25 @@ var $post = $('.post'),
             .append('<span class="quo icon-quote-right"></span>')
 
     });
+
+    $post.each(function () {
+        var postText = $(this).html();
+        var fa  = [];
+        for(var i=0; i < icons.length; i++) {
+            fa[i]       = {};
+            fa[i].str   = "@"+ icons[i]+ "@";
+            fa[i].icon  = icons[i];
+            fa[i].int   = postText.search(fa[i].str);
+
+            if(fa[i].int > -1 ) { 
+                fa[i].count = postText.match(new RegExp(fa[i].str,"g")).length;
+                console.log(fa[i].count)
+                for(var j=0; j < fa[i].count; j++) {
+                    $(this).html($(this).html().replace(fa[i].str, "<i class='fa "+fa[i].icon+"'></i>"))
+                }
+            }
+        }
+    })
+    
 
 }(jQuery));
