@@ -94,7 +94,9 @@ body {
     line-height: 1.6em;
     color: #3A4145;
 }
-
+a.fa {
+    text-decoration: none;
+}
 ::-moz-selection {
     color: #222;
     background: #D6EDFF;
