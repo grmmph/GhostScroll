@@ -64,42 +64,44 @@ var $post = $('.post'),
         })
 
         $('.post.last').next('.post-after').hide();
-        $(window).scroll( function () {
-        	var w = $(window).scrollTop(),
-        		g = $sitehead.offset().top,
-        		h = $sitehead.offset().top + $(this).height()-100;
+        if($sitehead.length) {
+            $(window).scroll( function () {
+            	var w = $(window).scrollTop(),
+            		g = $sitehead.offset().top,
+            		h = $sitehead.offset().top + $(this).height()-100;
 
-        	if(w >= g && w<=h) {
-        		$('.fixed-nav').fadeOut('fast')
-        	} else {
-                if($(window).width()>500)
-        		  $('.fixed-nav').fadeIn('fast')
-        	}
+            	if(w >= g && w<=h) {
+            		$('.fixed-nav').fadeOut('fast')
+            	} else {
+                    if($(window).width()>500)
+            		  $('.fixed-nav').fadeIn('fast')
+            	}
 
-        	$post.each(function () {
-        		var f = $(this).offset().top,
-        			b = $(this).offset().top + $(this).height(),
-        			t = $(this).parent('.post-holder').index(),
-        		 	i = $(".fn-item[item_index='"+t+"']"),
-        		 	a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
+            	$post.each(function () {
+            		var f = $(this).offset().top,
+            			b = $(this).offset().top + $(this).height(),
+            			t = $(this).parent('.post-holder').index(),
+            		 	i = $(".fn-item[item_index='"+t+"']"),
+            		 	a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
 
-        		 $(this).attr('item_index', t);
+            		 $(this).attr('item_index', t);
 
-        		if(w >= f && w<=b) {
+            		if(w >= f && w<=b) {
 
-        			i.addClass('active');
-        			a.fadeOut('slow')
-        		} else {
-        			i.removeClass('active');
-        			a.fadeIn('slow')
-        		}
-        	})
+            			i.addClass('active');
+            			a.fadeOut('slow')
+            		} else {
+            			i.removeClass('active');
+            			a.fadeIn('slow')
+            		}
+            	})
+            });
+            $('li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>')
+            $('blockquote p').prepend('<span class="quo icon-quote-left"></span>')
+                .append('<span class="quo icon-quote-right"></span>')
+
         });
-        $('li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>')
-        $('blockquote p').prepend('<span class="quo icon-quote-left"></span>')
-            .append('<span class="quo icon-quote-right"></span>')
-
-    });
+    }
 
     $post.each(function () {
         var postText = $(this).html();
