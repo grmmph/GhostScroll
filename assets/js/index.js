@@ -68,7 +68,7 @@ var $post = $('.post'),
             $(window).scroll( function () {
             	var w = $(window).scrollTop(),
             		g = $sitehead.offset().top,
-            		h = $sitehead.offset().top + $(this).height()-100;
+            		h = $sitehead.offset().top + $sitehead.height()-100;
 
             	if(w >= g && w<=h) {
             		$('.fixed-nav').fadeOut('fast')
