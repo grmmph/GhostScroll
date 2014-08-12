@@ -1,9 +1,9 @@
 /**
  * Main JS file for GhostScroll behaviours
  */
-var $post = $('.post'), 
-	$first = $('.post.first'), 
-	$last = $('.post.last'), 
+var $post = $('.post'),
+	$first = $('.post.first'),
+	$last = $('.post.last'),
 	$fnav = $('.fixed-nav'),
 	$postholder = $('.post-holder'),
 	$postafter = $('.post-after'),
@@ -18,7 +18,7 @@ var $post = $('.post'),
 		}, 1000);
     }
     $(document).ready(function(){
-     
+
         $postholder.each(function (e) {
         	if(e % 2 != 0)
         		$(this).css({
@@ -35,7 +35,7 @@ var $post = $('.post'),
         		$(this).css('left', '6%')
 
         })
-        
+
 
         $('.btn.first').click( function () {
         	srcTo ($first)
@@ -66,42 +66,44 @@ var $post = $('.post'),
         $('.post.last').next('.post-after').hide();
         if($sitehead.length) {
             $(window).scroll( function () {
-            	var w = $(window).scrollTop(),
-            		g = $sitehead.offset().top,
-            		h = $sitehead.offset().top + $sitehead.height()-100;
+                var w = $(window).scrollTop(),
+                    g = $sitehead.offset().top,
+                    h = $sitehead.offset().top + $(this).height()-100;
 
-            	if(w >= g && w<=h) {
-            		$('.fixed-nav').fadeOut('fast')
-            	} else {
+                if(w >= g && w<=h) {
+                    $('.fixed-nav').fadeOut('fast')
+                } else {
                     if($(window).width()>500)
-            		  $('.fixed-nav').fadeIn('fast')
-            	}
+                      $('.fixed-nav').fadeIn('fast')
+                }
 
-            	$post.each(function () {
-            		var f = $(this).offset().top,
-            			b = $(this).offset().top + $(this).height(),
-            			t = $(this).parent('.post-holder').index(),
-            		 	i = $(".fn-item[item_index='"+t+"']"),
-            		 	a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
+                $post.each(function () {
+                    var f = $(this).offset().top,
+                        b = $(this).offset().top + $(this).height(),
+                        t = $(this).parent('.post-holder').index(),
+                        i = $(".fn-item[item_index='"+t+"']"),
+                        a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
 
-            		 $(this).attr('item_index', t);
+                     $(this).attr('item_index', t);
 
-            		if(w >= f && w<=b) {
+                    if(w >= f && w<=b) {
 
-            			i.addClass('active');
-            			a.fadeOut('slow')
-            		} else {
-            			i.removeClass('active');
-            			a.fadeIn('slow')
-            		}
-            	})
+                        i.addClass('active');
+                        a.fadeOut('slow')
+                    } else {
+                        i.removeClass('active');
+                        a.fadeIn('slow')
+                    }
+                })
             });
-            $('li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>')
-            $('blockquote p').prepend('<span class="quo icon-quote-left"></span>')
+        }
+
+        $('li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>')
+        $('blockquote p').prepend('<span class="quo icon-quote-left"></span>')
                 .append('<span class="quo icon-quote-right"></span>')
 
-        });
-    }
+    });
+
 
     $post.each(function () {
         var postText = $(this).html();
@@ -112,15 +114,14 @@ var $post = $('.post'),
             fa[i].icon  = icons[i];
             fa[i].int   = postText.search(fa[i].str);
 
-            if(fa[i].int > -1 ) { 
+            if(fa[i].int > -1 ) {
                 fa[i].count = postText.match(new RegExp(fa[i].str,"g")).length;
-                console.log(fa[i].count)
                 for(var j=0; j < fa[i].count; j++) {
                     $(this).html($(this).html().replace(fa[i].str, "<i class='fa "+fa[i].icon+"'></i>"))
                 }
             }
         }
     })
-    
+
 
 }(jQuery));
