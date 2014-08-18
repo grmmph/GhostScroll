@@ -46,6 +46,9 @@ var $post = $('.post'),
         $('#header-arrow').click(function () {
             srcTo ($first)
         })
+        $('#totop-arrow').click(function () {
+            srcTo ($sitehead)
+        })
 
         $('.post-title').each(function () {
         	var t = $(this).text(),
