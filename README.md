@@ -4,7 +4,7 @@ Visit my Blog vor DEMO: http://blog.kroegerj.de
  * Social Buttons
  * Multiple pages (from [zebheone](https://github.com/zebheone/GhostScroll))
 
-## Costumization
+## Customization
  * Added Back-to-Top-Link in navigation
  * Added some social buttons in navigation
  * forked multiple pages from [zebheone](https://github.com/zebheone/GhostScroll)
