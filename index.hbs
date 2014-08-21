@@ -12,8 +12,8 @@
             <h1 class="blog-title">{{@blog.title}}</h1>
             <h2 class="blog-description">{{@blog.description}}</h2>
 
-            <a class='btn first'>Take a tour</a>
-            <a class='btn last'>Cut to the chase</a><br>
+            <a class='btn first'>Blog lesen</a>
+            <a class='btn last'>Letzter Post</a><br>
             <i id='header-arrow' class="fa fa-angle-down"></i>
         </div>
     </div>
@@ -24,6 +24,22 @@
 <main class="content" role="main">
 
     <div class='fixed-nav'>
+      <a class="social" href="https://twitter.com/wav3head"><span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+	<i clasS="fa fa-twitter fa-stack-1x"></i>
+      </span></a>
+      <a class="social" href="https://facebook.com/janek.kroeger"><span class="fa-stack fa-lg">
+	<i class="fa fa-square-o fa-stack-2x"></i>
+	<i class="fa fa-facebook fa-stack-1x"></i>
+      </span></a>
+      <a class="social" href="mailto:info@kroegerj.de"><span class="fa-stack fa-lg">
+	<i class="fa fa-square-o fa-stack-2x"></i>
+	<i class="fa fa-comments fa-stack-1x"></i>
+      </span></a>
+      <a id="totop-arrow"><span class="fa-stack fa-lg">
+	<i class="fa fa-square-o fa-stack-2x"></i>
+	<i class="fa fa-angle-up fa-stack-1x"></i>
+      </span></a>
     </div>
 
     {{! Each post will be output using this markup }}
@@ -42,7 +58,7 @@
         
             <header class="post-header">
                 
-                <h2 class="post-title">{{{title}}}</h2>
+                <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
 
             </header>
             <section class="post-content">
