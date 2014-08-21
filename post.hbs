@@ -2,63 +2,70 @@
 
 {{! The comment above "< default" means - insert everything in this file into
     the {body} of the default.hbs template, which contains our header/footer. }}
-
-<main class="content" role="main">
-
-    <article class="{{post_class}}">
-
-        {{! Each post has the blog logo at the top, with a link back to the home page }}
-        <header class="post-header">
-            <a id="blog-logo" href="{{@blog.url}}">
+<!---    <header id="site-head" {{#if @blog.cover}}style="background-image: url(/content/images/post_cover.jpg)"{{/if}}> --->
+<header id="site-head" {{#if @blog.cover}}style="background-image: url({{@blog.cover}})"{{/if}}>
+        <div class="vertical">
+        <div id="site-head-content" class="inner">
+<!---    <a id="blog-logo" href="{{@blog.url}}">
                 {{#if @blog.logo}}
-                    <img src="{{@blog.logo}}" alt="Blog Logo" />
+                    <img src="{{@blog.logo}}" alt="Back to home" />
                 {{else}}
                     {{@blog.title}}
                 {{/if}}
-            </a>
-        </header>
+            </a> --->
+        {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}}
+        <h1 class="blog-title">{{post.title}}</h1>
+	<a href="javascript:history.go(-1)" class="btn">Zurück</a><br>
+        <i id="header-arrow" class="fa fa-angle-down"></i>
+        </div>
+            </div>
+                </div>
+    
+    </header>
+<main class="content" role="main">
+    <div class="social-post">
+      <center>Teilen / Share<br></center>
+      <a class="social" href="http://twitter.com/share?text={{title}}&url={{@blog.url}}{{url}}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+      </span></a>
+      <a class="social" href="https://www.facebook.com/sharer/sharer.php?u={{@blog.url}}{{url}}"
+onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+      </span></a>
+      <a class="social" href="http://blog.kroegerj.de"><span class="fa-stack fa-lg">
+	<i class="fa fa-square-o fa-stack-2x"></i>
+	<i class="fa fa-home fa-stack-1x"></i>
+      </span></a>
+      <a id="totop-arrow"><span class="fa-stack fa-lg">
+        <i class="fa fa-square-o fa-stack-2x"></i>
+        <i class="fa fa-angle-up fa-stack-1x"></i>
+      </span></a>
+    </div>
+        <article id="{{id}}" class="{{post_class}} first">
+
+        {{! Each post has the blog logo at the top, with a link back to the home page }}
 
         {{! Everything inside the #post tags pulls data from the post }}
         {{#post}}
 
         {{! Everything below outputs content of the the post which has been published }}
-        <span class="post-meta"><time datetime="{{date format="YYYY-MM-DD"}}">{{date format='DD MMM YYYY'}}</time> {{#if tags}}on {{tags separator=" | "}}{{/if}}</span>
+        
+        <!-- <h1 class="post-title">{{{title}}}</h1> -->
 
-        <h1 class="post-title">{{{title}}}</h1>
+		<span class="post-meta"><i class="fa fa-calendar-o"></i> <time datetime="{{date format="YYYY-MM-DD"}}">{{date format='DD MMM YYYY'}}</time> {{#if tags}} <i class="fa fa-tag"></i> {{tags separator=", "}}{{/if}} </span>
 
         <section class="post-content">
-            {{content}}
+            {{content}}	
         </section>
 
-        <footer class="post-footer">
-
-            {{#if author}}
-                <section class="author">
-                    <h4>{{author.name}}</h4>
-                    <p>{{author.bio}}</p>
-                </section>
-            {{/if}}
-
-            <section class="share">
-                <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text={{title}}&url={{url absolute="true"}}"
-                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                    <span class="hidden">Twitter</span>
-                </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}"
-                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-                    <span class="hidden">Facebook</span>
-                </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url={{url absolute="true"}}"
-                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-                    <span class="hidden">Google+</span>
-                </a>
-            </section>
-
-        </footer>
-
         {{/post}}
+                
 
     </article>
 
 </main>
+
+
+

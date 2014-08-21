@@ -5,6 +5,7 @@ var $post = $('.post'),
 	$first = $('.post.first'), 
 	$last = $('.post.last'), 
 	$fnav = $('.fixed-nav'),
+	$spost = $('.social-post'),
 	$postholder = $('.post-holder'),
 	$postafter = $('.post-after'),
 	$sitehead = $('#site-head');
@@ -46,10 +47,11 @@ var $post = $('.post'),
         $('#header-arrow').click(function () {
             srcTo ($first)
         })
+        /*CUSTOM CODE BEGIN (ToTopArrow)*/
         $('#totop-arrow').click(function () {
             srcTo ($sitehead)
         })
-
+        /*CUSTOM CODE END*/
         $('.post-title').each(function () {
         	var t = $(this).text(),
         	    index = $(this).parents('.post-holder').index();
@@ -78,6 +80,12 @@ var $post = $('.post'),
                 } else {
                     if($(window).width()>500)
                       $('.fixed-nav').fadeIn('fast')
+                }
+		if(w >= g && w<=h) {
+                    $('.social-post').fadeOut('fast')
+                } else {
+                    if($(window).width()>500)
+                      $('.social-post').fadeIn('fast')
                 }
 
                 $post.each(function () {
