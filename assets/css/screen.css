@@ -397,10 +397,15 @@ table.plain {
         background: transparent;
     }
 }
+
 li {
-  list-style-type: none;
   margin-left: 30px;
 }
+
+ul li {
+  list-style-type: none;
+}
+
 .bult {
     display: inline;
     float: left;
