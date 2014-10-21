@@ -51,7 +51,6 @@ var $post = $('.post'),
         	var t = $(this).text(),
         	    index = $(this).parents('.post-holder').index();
         	$fnav.append("<a class='fn-item' item_index='"+index+"'>"+t+"</a>")
-		//
         	$(this).parents('article').attr('id',t.toLowerCase().split(' ').join('-'));
         	$('.fn-item').click(function () {
         		var i = $(this).attr('item_index'),
