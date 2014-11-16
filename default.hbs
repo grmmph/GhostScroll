@@ -1,13 +1,11 @@
-
 <!-- 
-    /****************************************************************************************************************/
-    /*                                                                                                              */
-    /*    Theme:    : GhostScroll (Based on Casper)                                                                 */
-    /*    Created by: Yonatan Wolowelsky                                                                            */
-    /*    Website   : http://grmmph.com                                                                             */
-    /*    License   : MIT                                                                                           */
-    /*                                                                                                              */
-    /****************************************************************************************************************/  -->
+/**
+ * Theme:       : GhostScroll (Based on Casper)
+ * Created by   : Yonatan Wolowelsky                              
+ * Website      : http://grmmph.com                               
+ * License      : MIT
+ */  
+-->
 
 <!DOCTYPE html>
 <html>
@@ -25,13 +23,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{! Styles'n'Scripts }}
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href='{{ asset "css/screen.css" }}' />
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href='{{asset "font-awesome/css/font-awesome.min.css"}}'>
 
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
@@ -52,8 +50,8 @@
     {{ghost_foot}}
 
     {{! The main JavaScript file for GhostScroll }}
-    <script type="text/javascript" src="/assets/js/icons.js"></script>
-    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript" src='{{asset "js/icons.js"}}'></script>
+    <script type="text/javascript" src='{{asset "js/index.js"}}'></script>
 
 
 </body>
