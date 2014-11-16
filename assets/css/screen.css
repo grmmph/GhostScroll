@@ -938,6 +938,7 @@ a.fn-item.active {
         padding: 15% 0;
         height: 100%;
         margin-bottom: 0rem;
+        background-position-y: 50%;
     }
 
     .blog-title {
