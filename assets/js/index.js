@@ -66,9 +66,6 @@ var $sitehead = $('#site-head');
 				var w = $(window).scrollTop();
 				var g = $sitehead.offset().top;
 				var h = $sitehead.offset().top + $sitehead.height()-100;
-				
-				var paralex = 30 + w/13 + "%";
-				$sitehead.css("background-position-y", paralex);
 
 				if(w >= g && w<=h) {
 					$('.fixed-nav').fadeOut('fast');
