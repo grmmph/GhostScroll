@@ -12,8 +12,13 @@
             <h1 class="blog-title">{{@blog.title}}</h1>
             <h2 class="blog-description">{{@blog.description}}</h2>
 
-            <a class='btn first'>Take a tour</a>
-            <a class='btn last'>Cut to the chase</a><br>
+            {{#if @blog.navigation}}
+                {{navigation}}
+            {{else}}
+                <a class='btn first'>Take a tour</a>
+                <a class='btn last'>Cut to the chase</a><br>
+            {{/if}}
+            
             <i id='header-arrow' class="fa fa-angle-down"></i>
         </div>
     </div>
