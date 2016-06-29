@@ -1,0 +1,3 @@
+{{#foreach navigation}}
+    <a href='{{url absolute="true"}}' class='btn {{#if @first}}first{{/if}} {{#if @last}}last{{/if}}'>{{label}}</a>
+{{/foreach}}
