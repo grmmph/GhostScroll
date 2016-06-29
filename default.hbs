@@ -31,6 +31,10 @@
 
     <link rel="stylesheet" href='{{asset "font-awesome/css/font-awesome.min.css"}}'>
 
+    {{! The default Favicon is the blog logo. }}
+    <link rel="shortcut icon" href="{{@blog.logo}}">
+    <link rel="icon" sizes="512x512" href="{{@blog.logo}}" />
+
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
 </head>
