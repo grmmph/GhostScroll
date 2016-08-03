@@ -563,11 +563,12 @@ a.fn-item.active {
     height: 0; 
     border-left: 60px solid transparent;
     border-right: 60px solid transparent;
-    border-top: 50px solid #f2efe8;
+    border-top: 50px solid #0099cc;
     border-radius: 25px;
 }
-.post-after.even {
+.post-holder:nth-child(even) > .post-after {
     left: 6%;
+    border-top-color: #f2efe8;
 }
 
 .post-title {
