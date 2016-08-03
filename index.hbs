@@ -29,23 +29,24 @@
         {{/posts}}
     </div>
 
-    {{! Each post will be output using this markup }}
-    {{#posts}}
-        <div class='post-holder' id="{{slug}}">
-            <article class="{{post_class}}">
-                <header class="post-header">
-                    <h2 class="post-title">{{{title}}}</h2>
-                </header>
+    <div id="posts-wrapper">
+        {{#posts}}
+            <div class='post-holder' id="{{slug}}">
+                <article class="{{post_class}}">
+                    <header class="post-header">
+                        <h2 class="post-title">{{{title}}}</h2>
+                    </header>
 
-                <section class="post-content">
-                    <p>{{content characters="9999999999999"}}</p>
-                </section>
-            </article>
+                    <section class="post-content">
+                        <p>{{content characters="9999999999999"}}</p>
+                    </section>
+                </article>
 
-            {{^if @last}}
-                <div class='post-after'></div>
-            {{/if}}
-        </div>
-    {{/posts}}
+                {{^if @last}}
+                    <div class='post-after'></div>
+                {{/if}}
+            </div>
+        {{/posts}}
+    </div>
 </main>
 
