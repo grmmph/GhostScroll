@@ -3,8 +3,6 @@
  */
 
 var $post = $('.post');
-var $first = $('.post.first'); 
-var $last = $('.post.last'); 
 var $fnav = $('.fixed-nav');
 var $postafter = $('.post-after');
 var $sitehead = $('#site-head');
@@ -18,15 +16,14 @@ var $sitehead = $('#site-head');
 		}, 1000);
 	}
 	$(document).ready(function(){
-	 
-		$('.btn.first').click( function () {
+
+		$('.btn.first, #header-arrow').click( function () {
+            var $first = $post.first();
 			srcTo($first);
 		});
 		$('.btn.last').click( function () {
+            var $last = $post.last();
 			srcTo($last);
-		});
-		$('#header-arrow').click(function () {
-			srcTo($first);
 		});
 
 		$('.post-title').each(function () {

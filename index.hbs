@@ -30,16 +30,7 @@
     {{#foreach posts}}
     <div class='post-holder'>
 
-            {{#if @first}}
-                <article class="{{post_class}} first">
-            {{else}}
-                {{#if @last}}
-                    <article class="{{post_class}} last">
-                {{else}}
-                    <article class="{{post_class}}">
-                {{/if}}
-            {{/if}}
-        
+        <article class="{{post_class}}">
             <header class="post-header">
                 
                 <h2 class="post-title">{{{title}}}</h2>
@@ -56,8 +47,5 @@
     </div>
 
     {{/foreach}}
-
-    {{!! After all the posts, we have the previous/next pagination links }}
-    
-
 </main>
+
