@@ -8,10 +8,12 @@
     <div class="vertical">
         <div id="site-head-content" class="inner">
 
+            {{! TODO: Use @blog.title OR @blog.logo, not both}}
             {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}}
             <h1 class="blog-title">{{@blog.title}}</h1>
             <h2 class="blog-description">{{@blog.description}}</h2>
 
+            {{! TODO: Use `navigation` partial}}
             <a class='btn first'>Take a tour</a>
             <a class='btn last'>Cut to the chase</a><br>
             <i id='header-arrow' class="fa fa-angle-down"></i>

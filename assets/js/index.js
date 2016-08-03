@@ -18,6 +18,7 @@ var $sitehead = $('#site-head');
 		fontAwesomeReplacement();
 
 		function setupJumpHandlers() {
+      // TODO: replace buttons with user set navigator
 			$('.btn.first, #header-arrow').click( function () {
 				var $first = $(".post").first();
 				smoothScroll($first);
@@ -30,11 +31,13 @@ var $sitehead = $('#site-head');
 
 			$('.fn-item').click(function (evt) {
 				evt.preventDefault();
+        // TODO: update URL with deep link
 				var slug = $(this).attr("href");
 				smoothScroll($(slug))
 			});
 		}
 
+    // TODO: Do this with psuedoclasses in the CSS
 		function fontAwesomeDecorators() {
 			$('ul > li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>');
 			$('blockquote p').prepend('<span class="quo icon-quote-left"></span>');
@@ -72,6 +75,7 @@ var $sitehead = $('#site-head');
 			var navOpacity = shouldDisplayNav() ? 1 : 0;
 			$(".fixed-nav").css("opacity", navOpacity);
 
+      // TODO: Pull this logic back up into main function
 			function shouldDisplayNav() {
 				var isTooNarrow = $(window).width() < 500;
 				return (!isTooNarrow && !isElementInViewport($sitehead));
@@ -82,7 +86,9 @@ var $sitehead = $('#site-head');
 			$(".post-holder").each(function () {
 				var $this = $(this);
 				var postId = $this.attr("id");
+        // TODO: Rename with `$` for consistency
 				var thisNavLink = $(".fn-item[href='#" + postId + "']");
+        // TODO: Rename with `$` for consistency
 				var previousArrow = $(this).prev('.post-holder').find('.post-after');
 
 				if(isElementInViewport($this)) {
@@ -107,6 +113,7 @@ var $sitehead = $('#site-head');
 		}
 	}
 
+  // TODO: rename `el` to `$element` for consistency
 	function smoothScroll (el) {
 		$('html, body').animate({
 			scrollTop: el.offset().top
