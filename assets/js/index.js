@@ -4,7 +4,6 @@
  * Main JS file for GhostScroll behaviours
  */
 
-var $post = $('.post');
 var $sitehead = $('#site-head');
 
 /* Globals jQuery, document */
@@ -20,11 +19,12 @@ var $sitehead = $('#site-head');
 
 		function setupJumpHandlers() {
 			$('.btn.first, #header-arrow').click( function () {
-				var $first = $post.first();
+				var $first = $(".post").first();
 				smoothScroll($first);
 			});
+
 			$('.btn.last').click( function () {
-				var $last = $post.last();
+				var $last = $(".post").last();
 				smoothScroll($last);
 			});
 
@@ -42,28 +42,25 @@ var $sitehead = $('#site-head');
 		}
 
 		function fontAwesomeReplacement() {
-			$post.each(function () {
-				var postText = $(this).html();
-				var fa = [];
-				for(var i=0; i < icons.length; i++) {
-					fa[i] = {};
-					fa[i].str = "@"+ icons[i]+ "@";
-					fa[i].icon = icons[i];
-					fa[i].int = postText.search(fa[i].str);
+			// // Matches
+			// @fa-singleword@
+			// @fa-dash-separated-words@
+			// // Does *not* match
+			// \@fa-escaped@
+			// @fa-space separated@
+			// @fa-Invalid-Case@
+			// @fa-Invalid-(H^R@
+			// @fa-will-match@@fa-will-not-match@
+			//
+			// Note: JS doesn't support negative lookbehinds. Thus to permit
+			// escaped examples (\@fa-foo@) we capture the preceeding
+			// character. This shouldn't pose a problem except in the event of
+			// adjacent font-awesome characters (that are not space separated).
+			// See last example above.
+			var reg = /([^\\])@(fa-[-a-z]+)@/g;
 
-					if(fa[i].int > -1 ) { 
-						fa[i].count = postText.match(new RegExp(fa[i].str,"g")).length;
-						for(var j=0; j < fa[i].count; j++) {
-							$(this).html(
-								$(this).html().replace(
-									fa[i].str, 
-									"<i class='fa "+fa[i].icon+"'></i>"
-								)
-							)
-						}
-					}
-				}
-			});
+			var $posts = $("#posts-wrapper")
+			$posts.html($posts.html().replace(reg, "$1<i class='fa $2'></i>"));
 		}
 	}
 	
