@@ -32,20 +32,28 @@ var $sitehead = $('#site-head');
             smoothScroll($(slug))
         });
 
-        $(window).scroll( function () {
-            var w = $(window).scrollTop();
-            var g = $sitehead.offset().top;
-            var h = $sitehead.offset().top + $sitehead.height()-100;
-            
-            // parallax stuff
-            var paralex = 30 + w/13 + "%";
-            $sitehead.css("background-position-y", paralex);
+        function isHeadInViewport() {
+            var scrollPosition = $(window).scrollTop();
+            var topOfHead = $sitehead.offset().top;
+            var bottomOfHead = topOfHead + $sitehead.height() - 100;
 
+            var isAboveHead = topOfHead > scrollPosition;
+            var isBelowHead = scrollPosition > bottomOfHead;
+            return (!isAboveHead && !isBelowHead);
+        }
+
+        function shouldDisplayNav() {
+            var isTooNarrow = $(window).width() < 500;
+            return (!isTooNarrow && !isHeadInViewport());
+        }
+
+        $(window).scroll( function () {
             // fade out fixed-nav
-            if(w >= g && w<=h) {
-                $('.fixed-nav').fadeOut('fast');
-            } else if($(window).width()>500) {
+            if(shouldDisplayNav()) {
                 $('.fixed-nav').fadeIn('fast');
+            }
+            else {
+                $('.fixed-nav').fadeOut('fast');
             }
 
             // highlight appropriate fixed-nav element
