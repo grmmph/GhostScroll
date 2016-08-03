@@ -24,10 +24,13 @@ var $sitehead = $('#site-head');
 			});
 
 			$('.fn-item, .btn').click(function (evt) {
-				evt.preventDefault();
-        // TODO: update URL with deep link
 				var slug = $(this).attr("href");
-				smoothScroll($(slug))
+        // We don't want to prevent a link from working if it is external.
+        if (slug.slice(0,1) === "#") {
+          evt.preventDefault();
+          // TODO: update URL with deep link
+          smoothScroll($(slug))
+        }
 			});
 		}
 
