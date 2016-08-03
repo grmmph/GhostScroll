@@ -18,18 +18,12 @@ var $sitehead = $('#site-head');
 		fontAwesomeReplacement();
 
 		function setupJumpHandlers() {
-      // TODO: replace buttons with user set navigator
-			$('.btn.first, #header-arrow').click( function () {
+			$('#header-arrow').click( function () {
 				var $first = $(".post").first();
 				smoothScroll($first);
 			});
 
-			$('.btn.last').click( function () {
-				var $last = $(".post").last();
-				smoothScroll($last);
-			});
-
-			$('.fn-item').click(function (evt) {
+			$('.fn-item, .btn').click(function (evt) {
 				evt.preventDefault();
         // TODO: update URL with deep link
 				var slug = $(this).attr("href");
