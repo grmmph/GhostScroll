@@ -19,15 +19,6 @@ var $sitehead = $('#site-head');
 	}
 	$(document).ready(function(){
 	 
-		$postafter.each(function (e) {
-			var bg = $(this).parent().css('background-color')
-			$(this).css('border-top-color', bg);
-
-			if (e % 2 == 0) {
-				$(this).addClass("even");
-			}
-		});
-		
 		$('.btn.first').click( function () {
 			srcTo($first);
 		});
@@ -54,7 +45,6 @@ var $sitehead = $('#site-head');
 			});
 		});
 
-		$('.post.last').next('.post-after').hide();
 		if($sitehead.length) { 
 			$(window).scroll( function () {
 				var w = $(window).scrollTop();
