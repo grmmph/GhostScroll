@@ -1,20 +1,20 @@
+"use strict";
+
 /**
  * Main JS file for GhostScroll behaviours
  */
 
 var $post = $('.post');
-var $fnav = $('.fixed-nav');
-var $postafter = $('.post-after');
 var $sitehead = $('#site-head');
 
 /* Globals jQuery, document */
 (function ($) {
-	"use strict";
 	function smoothScroll (el) {
 		$('html, body').animate({
 			scrollTop: el.offset().top
 		}, 400);
 	}
+
 	$(document).ready(function(){
 
 		$('.btn.first, #header-arrow').click( function () {
@@ -32,59 +32,55 @@ var $sitehead = $('#site-head');
             smoothScroll($(slug))
         });
 
-        var isFading = false;
         function conditionallyShowNav() {
             var navOpacity = shouldDisplayNav() ? 1 : 0;
             $(".fixed-nav").css("opacity", navOpacity);
 
             function shouldDisplayNav() {
                 var isTooNarrow = $(window).width() < 500;
-                return (!isTooNarrow && !isHeadInViewport());
+                return (!isTooNarrow && !isElementInViewport($sitehead));
             }
+        }
 
-            function isHeadInViewport() {
-                var scrollPosition = $(window).scrollTop();
-                var topOfHead = $sitehead.offset().top;
-                var bottomOfHead = topOfHead + $sitehead.height() - 100;
+        function highlightActiveSection() {
+            $(".post-holder").each(function () {
+                var $this = $(this);
+                var postId = $this.attr("id");
+                var thisNavLink = $(".fn-item[href='#" + postId + "']");
+                var previousArrow = $(this).prev('.post-holder').find('.post-after');
 
-                var isAboveHead = topOfHead > scrollPosition;
-                var isBelowHead = scrollPosition > bottomOfHead;
-                return (!isAboveHead && !isBelowHead);
-            }
+                if(isElementInViewport($this)) {
+                    thisNavLink.addClass('active');
+                    previousArrow.fadeOut('slow');
+                } else {
+                    thisNavLink.removeClass('active');
+                    previousArrow.fadeIn('slow');
+                }
+            });
+        }
+
+        function isElementInViewport($element) {
+            var scrollPosition = $(window).scrollTop();
+            var topOfElement = $element.offset().top;
+            var bottomOfElement = topOfElement + $element.height();
+
+            var isAboveElement = topOfElement > scrollPosition;
+            var isBelowElement = scrollPosition >= bottomOfElement;
+
+            return (!isAboveElement && !isBelowElement);
         }
 
         $(window).resize(function() {
             conditionallyShowNav();
-        })
+            highlightActiveSection();
+        });
 
         $(window).scroll( function () {
             conditionallyShowNav();
-
-            // highlight appropriate fixed-nav element
-            $post.each(function () {
-                var f = $(this).offset().top;
-                var b = $(this).offset().top + $(this).height();
-                var t = $(this).parent('.post-holder').index();
-                // fixed-nav active post
-                var i = $(".fn-item[item_index='"+t+"']");
-                // previous arrow
-                var a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
-
-                // deprecated
-                $(this).attr('item_index', t);
-
-                // // fade in/out elements
-                // if(w >= f && w<=b) {
-                //     i.addClass('active');
-                //     a.fadeOut('slow');
-                // } else {
-                //     i.removeClass('active');
-                //     a.fadeIn('slow');
-                // }
-            });
+            highlightActiveSection();
         });
 
-		$('ul li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>');
+        $('ul > li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>');
 		$('blockquote p').prepend('<span class="quo icon-quote-left"></span>');
 		$('blockquote p').append('<span class="quo icon-quote-right"></span>');
 	});
