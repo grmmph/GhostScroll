@@ -24,28 +24,29 @@
 <main class="content" role="main">
 
     <div class='fixed-nav'>
+        {{#posts}}
+            <a href="#{{slug}}" class="fn-item">{{title}}</a>
+        {{/posts}}
     </div>
 
     {{! Each post will be output using this markup }}
-    {{#foreach posts}}
-    <div class='post-holder'>
+    {{#posts}}
+        <div class='post-holder'>
 
-        <article class="{{post_class}}">
-            <header class="post-header">
-                
-                <h2 class="post-title">{{{title}}}</h2>
+            <article class="{{post_class}}" id="{{slug}}">
+                <header class="post-header">
+                    <h2 class="post-title">{{{title}}}</h2>
+                </header>
 
-            </header>
-            <section class="post-content">
-                <p>{{content characters="9999999999999"}}</p>
-            </section>
-        </article>
+                <section class="post-content">
+                    <p>{{content characters="9999999999999"}}</p>
+                </section>
+            </article>
 
-        {{^if @last}}
-            <div class='post-after'></div>
-        {{/if}}
-    </div>
-
-    {{/foreach}}
+            {{^if @last}}
+                <div class='post-after'></div>
+            {{/if}}
+        </div>
+    {{/posts}}
 </main>
 
