@@ -29,7 +29,7 @@
     {{! Each post will be output using this markup }}
     {{#foreach posts}}
     <div class='post-holder'>
-        
+
             {{#if @first}}
                 <article class="{{post_class}} first">
             {{else}}
@@ -49,7 +49,10 @@
                 <p>{{content characters="9999999999999"}}</p>
             </section>
         </article>
-        <div class='post-after'></div>
+
+        {{^if @last}}
+            <div class='post-after'></div>
+        {{/if}}
     </div>
 
     {{/foreach}}
