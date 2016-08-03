@@ -30,11 +30,17 @@ var $sitehead = $('#site-head');
 			});
 
 			$('.fn-item').click(function (evt) {
-				evt.preventDefault();
-        // TODO: update URL with deep link
-				var slug = $(this).attr("href");
-				smoothScroll($(slug))
-			});
+        var $this = $(this);
+        var href = $this.attr("href");
+
+        // We don't want to prevent a link from working if it is external.
+        if (href.slice(0,1) === "#") {
+          evt.preventDefault();
+          var title = $this.text();
+          window.history.pushState(title, title, href);
+          smoothScroll($(href))
+        }
+      });
 		}
 
     // TODO: Do this with psuedoclasses in the CSS
