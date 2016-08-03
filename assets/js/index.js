@@ -32,29 +32,33 @@ var $sitehead = $('#site-head');
             smoothScroll($(slug))
         });
 
-        function isHeadInViewport() {
-            var scrollPosition = $(window).scrollTop();
-            var topOfHead = $sitehead.offset().top;
-            var bottomOfHead = topOfHead + $sitehead.height() - 100;
+        var isFading = false;
+        function conditionallyShowNav() {
+            var navOpacity = shouldDisplayNav() ? 1 : 0;
+            $(".fixed-nav").css("opacity", navOpacity);
 
-            var isAboveHead = topOfHead > scrollPosition;
-            var isBelowHead = scrollPosition > bottomOfHead;
-            return (!isAboveHead && !isBelowHead);
+            function shouldDisplayNav() {
+                var isTooNarrow = $(window).width() < 500;
+                return (!isTooNarrow && !isHeadInViewport());
+            }
+
+            function isHeadInViewport() {
+                var scrollPosition = $(window).scrollTop();
+                var topOfHead = $sitehead.offset().top;
+                var bottomOfHead = topOfHead + $sitehead.height() - 100;
+
+                var isAboveHead = topOfHead > scrollPosition;
+                var isBelowHead = scrollPosition > bottomOfHead;
+                return (!isAboveHead && !isBelowHead);
+            }
         }
 
-        function shouldDisplayNav() {
-            var isTooNarrow = $(window).width() < 500;
-            return (!isTooNarrow && !isHeadInViewport());
-        }
+        $(window).resize(function() {
+            conditionallyShowNav();
+        })
 
         $(window).scroll( function () {
-            // fade out fixed-nav
-            if(shouldDisplayNav()) {
-                $('.fixed-nav').fadeIn('fast');
-            }
-            else {
-                $('.fixed-nav').fadeOut('fast');
-            }
+            conditionallyShowNav();
 
             // highlight appropriate fixed-nav element
             $post.each(function () {
@@ -69,14 +73,14 @@ var $sitehead = $('#site-head');
                 // deprecated
                 $(this).attr('item_index', t);
 
-                // fade in/out elements
-                if(w >= f && w<=b) {
-                    i.addClass('active');
-                    a.fadeOut('slow');
-                } else {
-                    i.removeClass('active');
-                    a.fadeIn('slow');
-                }
+                // // fade in/out elements
+                // if(w >= f && w<=b) {
+                //     i.addClass('active');
+                //     a.fadeOut('slow');
+                // } else {
+                //     i.removeClass('active');
+                //     a.fadeIn('slow');
+                // }
             });
         });
 
