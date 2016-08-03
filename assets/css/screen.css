@@ -502,7 +502,7 @@ ul li {
     background: #f2efe8;
     position: relative;
 }
-.post-holder.odd {
+.post-holder:nth-of-type(odd) {
     background: #0099cc;
     color: white;
 }
