@@ -30,7 +30,7 @@ var $sitehead = $('#site-head');
         // We don't want to prevent a link from working if it is external.
         if (href.slice(0,1) === "#") {
           evt.preventDefault();
-          var title = $(this).text();
+          var title = $this.text();
           window.history.pushState(title, title, href);
           smoothScroll($(href))
         }
