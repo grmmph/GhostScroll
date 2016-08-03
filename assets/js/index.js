@@ -72,14 +72,11 @@ var $sitehead = $('#site-head');
 		highlightActiveSection();
 
 		function conditionallyShowNav() {
-			var navOpacity = shouldDisplayNav() ? 1 : 0;
-			$(".fixed-nav").css("opacity", navOpacity);
+      var isTooNarrow = $(window).width() < 500;
+      var shouldDisplayNav = !isTooNarrow && !isElementInViewport($sitehead);
+			var navOpacity = shouldDisplayNav ? 1 : 0;
 
-      // TODO: Pull this logic back up into main function
-			function shouldDisplayNav() {
-				var isTooNarrow = $(window).width() < 500;
-				return (!isTooNarrow && !isElementInViewport($sitehead));
-			}
+			$(".fixed-nav").css("opacity", navOpacity);
 		}
 
 		function highlightActiveSection() {
