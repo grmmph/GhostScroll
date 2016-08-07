@@ -584,7 +584,12 @@ ul li {
     height: 70%;
     word-break: break-word;
     hyphens: auto;
+}
 
+.post img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Add a little circle in the middle of the border-bottom on our .post
