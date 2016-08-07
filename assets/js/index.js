@@ -18,6 +18,7 @@ var $sitehead = $('#site-head');
 		fontAwesomeReplacement();
 
 		function setupJumpHandlers() {
+      // TODO: replace buttons with user set navigator
 			$('.btn.first, #header-arrow').click( function () {
 				var $first = $(".post").first();
 				smoothScroll($first);
@@ -29,12 +30,20 @@ var $sitehead = $('#site-head');
 			});
 
 			$('.fn-item').click(function (evt) {
-				evt.preventDefault();
-				var slug = $(this).attr("href");
-				smoothScroll($(slug))
-			});
+        var $this = $(this);
+        var href = $this.attr("href");
+
+        // We don't want to prevent a link from working if it is external.
+        if (href.slice(0,1) === "#") {
+          evt.preventDefault();
+          var title = $this.text();
+          window.history.pushState(title, title, href);
+          smoothScroll($(href))
+        }
+      });
 		}
 
+    // TODO: Do this with psuedoclasses in the CSS
 		function fontAwesomeDecorators() {
 			$('ul > li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>');
 			$('blockquote p').prepend('<span class="quo icon-quote-left"></span>');
@@ -69,28 +78,26 @@ var $sitehead = $('#site-head');
 		highlightActiveSection();
 
 		function conditionallyShowNav() {
-			var navOpacity = shouldDisplayNav() ? 1 : 0;
-			$(".fixed-nav").css("opacity", navOpacity);
+      var isTooNarrow = $(window).width() < 500;
+      var shouldDisplayNav = !isTooNarrow && !isElementInViewport($sitehead);
+			var navOpacity = shouldDisplayNav ? 1 : 0;
 
-			function shouldDisplayNav() {
-				var isTooNarrow = $(window).width() < 500;
-				return (!isTooNarrow && !isElementInViewport($sitehead));
-			}
+			$(".fixed-nav").css("opacity", navOpacity);
 		}
 
 		function highlightActiveSection() {
 			$(".post-holder").each(function () {
 				var $this = $(this);
 				var postId = $this.attr("id");
-				var thisNavLink = $(".fn-item[href='#" + postId + "']");
-				var previousArrow = $(this).prev('.post-holder').find('.post-after');
+				var $thisNavLink = $(".fn-item[href='#" + postId + "']");
+				var $previousArrow = $(this).prev('.post-holder').find('.post-after');
 
 				if(isElementInViewport($this)) {
-					thisNavLink.addClass('active');
-					previousArrow.fadeOut('slow');
+					$thisNavLink.addClass('active');
+					$previousArrow.fadeOut('slow');
 				} else {
-					thisNavLink.removeClass('active');
-					previousArrow.fadeIn('slow');
+					$thisNavLink.removeClass('active');
+					$previousArrow.fadeIn('slow');
 				}
 			});
 		}
@@ -107,9 +114,9 @@ var $sitehead = $('#site-head');
 		}
 	}
 
-	function smoothScroll (el) {
+	function smoothScroll ($element) {
 		$('html, body').animate({
-			scrollTop: el.offset().top
+			scrollTop: $element.offset().top
 		}, 400);
 	}
 
