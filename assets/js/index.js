@@ -1,123 +1,123 @@
+"use strict";
+
 /**
  * Main JS file for GhostScroll behaviours
  */
 
-var $post = $('.post');
-var $first = $('.post.first'); 
-var $last = $('.post.last'); 
-var $fnav = $('.fixed-nav');
-var $postholder = $('.post-holder');
-var $postafter = $('.post-after');
 var $sitehead = $('#site-head');
 
 /* Globals jQuery, document */
 (function ($) {
-	"use strict";
-	function srcTo (el) {
-		$('html, body').animate({
-			scrollTop: el.offset().top
-		}, 1000);
+	$(document).ready(initialize);
+	$(window).resize(onViewportChange);
+	$(window).scroll(onViewportChange);
+
+	function initialize() {
+		setupJumpHandlers();
+		fontAwesomeDecorators();
+		fontAwesomeReplacement();
+
+		function setupJumpHandlers() {
+      // TODO: replace buttons with user set navigator
+			$('.btn.first, #header-arrow').click( function () {
+				var $first = $(".post").first();
+				smoothScroll($first);
+			});
+
+			$('.btn.last').click( function () {
+				var $last = $(".post").last();
+				smoothScroll($last);
+			});
+
+			$('.fn-item').click(function (evt) {
+        var $this = $(this);
+        var href = $this.attr("href");
+
+        // We don't want to prevent a link from working if it is external.
+        if (href.slice(0,1) === "#") {
+          evt.preventDefault();
+          var title = $this.text();
+          window.history.pushState(title, title, href);
+          smoothScroll($(href))
+        }
+      });
+		}
+
+    // TODO: Do this with psuedoclasses in the CSS
+		function fontAwesomeDecorators() {
+			$('ul > li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>');
+			$('blockquote p').prepend('<span class="quo icon-quote-left"></span>');
+			$('blockquote p').append('<span class="quo icon-quote-right"></span>');
+		}
+
+		function fontAwesomeReplacement() {
+			// // Matches
+			// @fa-singleword@
+			// @fa-dash-separated-words@
+			// // Does *not* match
+			// \@fa-escaped@
+			// @fa-space separated@
+			// @fa-Invalid-Case@
+			// @fa-Invalid-(H^R@
+			// @fa-will-match@@fa-will-not-match@
+			//
+			// Note: JS doesn't support negative lookbehinds. Thus to permit
+			// escaped examples (\@fa-foo@) we capture the preceeding
+			// character. This shouldn't pose a problem except in the event of
+			// adjacent font-awesome characters (that are not space separated).
+			// See last example above.
+			var reg = /([^\\])@(fa-[-a-z]+)@/g;
+
+			var $posts = $("#posts-wrapper")
+			$posts.html($posts.html().replace(reg, "$1<i class='fa $2'></i>"));
+		}
 	}
-	$(document).ready(function(){
-	 
-		$postholder.each(function (e) {
-			if(e % 2 != 0)
-				$(this).addClass("odd");
-		});
+	
+	function onViewportChange() {
+		conditionallyShowNav();
+		highlightActiveSection();
 
-		$postafter.each(function (e) {
-			var bg = $(this).parent().css('background-color')
-			$(this).css('border-top-color', bg);
+		function conditionallyShowNav() {
+      var isTooNarrow = $(window).width() < 500;
+      var shouldDisplayNav = !isTooNarrow && !isElementInViewport($sitehead);
+			var navOpacity = shouldDisplayNav ? 1 : 0;
 
-			if (e % 2 == 0) {
-				$(this).addClass("even");
-			}
-		});
-		
-		$('.btn.first').click( function () {
-			srcTo($first);
-		});
-		$('.btn.last').click( function () {
-			srcTo($last);
-		});
-		$('#header-arrow').click(function () {
-			srcTo($first);
-		});
+			$(".fixed-nav").css("opacity", navOpacity);
+		}
 
-		$('.post-title').each(function () {
-			var t = $(this).text();
-			var index = $(this).parents('.post-holder').index();
-			$fnav.append("<a class='fn-item' item_index='"+index+"'>"+t+"</a>")
-			$(this).parents('article').attr('id',t.toLowerCase().split(' ').join('-'));
-			$('.fn-item').click(function () {
-				var i = $(this).attr('item_index');
-				var s = $(".post[item_index='"+i+"']");
+		function highlightActiveSection() {
+			$(".post-holder").each(function () {
+				var $this = $(this);
+				var postId = $this.attr("id");
+				var $thisNavLink = $(".fn-item[href='#" + postId + "']");
+				var $previousArrow = $(this).prev('.post-holder').find('.post-after');
 
-				$('html, body').animate({
-					scrollTop: s.offset().top
-				}, 400);
-
-			});
-		});
-
-		$('.post.last').next('.post-after').hide();
-		if($sitehead.length) { 
-			$(window).scroll( function () {
-				var w = $(window).scrollTop();
-				var g = $sitehead.offset().top;
-				var h = $sitehead.offset().top + $sitehead.height()-100;
-				
-				var paralex = 30 + w/13 + "%";
-				$sitehead.css("background-position-y", paralex);
-
-				if(w >= g && w<=h) {
-					$('.fixed-nav').fadeOut('fast');
-				} else if($(window).width()>500) {
-					$('.fixed-nav').fadeIn('fast');
+				if(isElementInViewport($this)) {
+					$thisNavLink.addClass('active');
+					$previousArrow.fadeOut('slow');
+				} else {
+					$thisNavLink.removeClass('active');
+					$previousArrow.fadeIn('slow');
 				}
-
-				$post.each(function () {
-					var f = $(this).offset().top;
-					var b = $(this).offset().top + $(this).height();
-					var t = $(this).parent('.post-holder').index();
-					var i = $(".fn-item[item_index='"+t+"']");
-					var a = $(this).parent('.post-holder').prev('.post-holder').find('.post-after');
-
-					$(this).attr('item_index', t);
-
-					if(w >= f && w<=b) {
-						i.addClass('active');
-						a.fadeOut('slow');
-					} else {
-						i.removeClass('active');
-						a.fadeIn('slow');
-					}
-				});
 			});
 		}
 
-		$('ul li').before('<span class="bult fa fa-asterisk icon-asterisk"></span>');
-		$('blockquote p').prepend('<span class="quo icon-quote-left"></span>');
-		$('blockquote p').append('<span class="quo icon-quote-right"></span>');
-	});
-	
-	$post.each(function () {
-		var postText = $(this).html();
-		var fa  = [];
-		for(var i=0; i < icons.length; i++) {
-			fa[i]       = {};
-			fa[i].str   = "@"+ icons[i]+ "@";
-			fa[i].icon  = icons[i];
-			fa[i].int   = postText.search(fa[i].str);
+		function isElementInViewport($element) {
+			var scrollPosition = $(window).scrollTop();
+			var topOfElement = $element.offset().top;
+			var bottomOfElement = topOfElement + $element.height();
 
-			if(fa[i].int > -1 ) { 
-				fa[i].count = postText.match(new RegExp(fa[i].str,"g")).length;
-				for(var j=0; j < fa[i].count; j++) {
-					$(this).html($(this).html().replace(fa[i].str, "<i class='fa "+fa[i].icon+"'></i>"))
-				}
-			}
+			var isAboveElement = topOfElement > scrollPosition;
+			var isBelowElement = scrollPosition >= bottomOfElement;
+
+			return (!isAboveElement && !isBelowElement);
 		}
-	});
-	
+	}
+
+	function smoothScroll ($element) {
+		$('html, body').animate({
+			scrollTop: $element.offset().top
+		}, 400);
+	}
 
 }(jQuery));
