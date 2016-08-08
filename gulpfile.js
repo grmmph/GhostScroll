@@ -13,7 +13,7 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('assets/css/'))
 })
 
-gulp.task('penthouse', function() {
+gulp.task('penthouse', ['sass'], function() {
   penthouse({
     url: "http://localhost:2368",
     css: "assets/css/main.css",
@@ -28,10 +28,10 @@ gulp.task('penthouse', function() {
   })
 })
 
-gulp.task('build', [ 'sass' ])
+gulp.task('build', [ 'sass', 'penthouse' ])
 
 gulp.task('watch', function() {
-  gulp.watch('assets/sass/**/*.+(sass|scss)', ['sass'])
+  gulp.watch('assets/sass/**/*.+(sass|scss)', ['sass', 'penthouse'])
 })
 
 
