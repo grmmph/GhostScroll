@@ -2,8 +2,10 @@
   "name": "GhostScroll",
   "version": "0.1.1",
   "devDependencies": {
+    "cssnano": "^3.7.3",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.2",
-    "gulp-sass": "^2.3.2"
+    "gulp-sass": "^2.3.2",
+    "penthouse": "^0.9.11"
   }
 }
