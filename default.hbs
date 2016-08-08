@@ -23,13 +23,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{! Styles'n'Scripts }}
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Oswald:300|Roboto+Slab:400,300,100,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+    {{! Asynchronously load CSS with preload (polyfill loadCSS) }}
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Oswald:300|Roboto+Slab:400,300,100,700|Open+Sans:400,700" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+
+    <noscript>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Oswald:300|Roboto+Slab:400,300,100,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css' rel="stylesheet">
+    </noscript>
+
     <link rel="stylesheet" type="text/css" href='{{ asset "css/screen.css" }}' />
 
     {{! Prefetch the hero image}}
     {{#if @blog.cover}}
-      <link rel="prefetch" href="{{@blog.cover}}" />
+    <link rel="prefetch" href="{{@blog.cover}}" />
     {{/if}}
 
     {{! Ghost outputs important style and meta data with this tag }}
@@ -52,6 +59,7 @@
 
     {{! The main JavaScript file for GhostScroll }}
     <script type="text/javascript" src='{{asset "js/index.js"}}'></script>
+    {{> load-css-polyfill}}
 
     {{! Ghost outputs important scripts and data with this tag }}
     {{ghost_foot}}
