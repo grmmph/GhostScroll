@@ -1,4 +1,7 @@
 {
-	"name": "GhostScroll",
-	"version": "0.1.1"
+  "name": "GhostScroll",
+  "version": "0.1.1",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
