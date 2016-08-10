@@ -2,7 +2,6 @@ var fs = require('fs')
 var gulp = require('gulp')
 
 var cssnano = require('cssnano')
-var gulpCssNano = require('gulp-cssnano')
 var sass = require('gulp-sass')
 var autoprefixer = require('gulp-autoprefixer')
 var penthouse = require('penthouse')
@@ -15,7 +14,6 @@ gulp.task('sass', function() {
     .pipe(autoprefixer({
       browsers: ['> 1%']
     }))
-    // .pipe(gulpCssNano())
     .pipe(gulp.dest('assets/css/'))
 })
 
