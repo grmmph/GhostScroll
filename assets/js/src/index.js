@@ -4,11 +4,9 @@
  * Main JS file for GhostScroll behaviours
  */
 
-var $sitehead = $('#site-head');
-
 /* Globals jQuery, document */
 (function ($) {
-	$(document).ready(initialize);
+  initialize();
 	$(window).resize(onViewportChange);
 	$(window).scroll(onViewportChange);
 
@@ -73,6 +71,7 @@ var $sitehead = $('#site-head');
 		}
 	}
 	
+  var $sitehead = $('#site-head');
 	function onViewportChange() {
 		conditionallyShowNav();
 		highlightActiveSection();
