@@ -7,6 +7,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-cssnano": "^2.1.2",
     "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
     "penthouse": "^0.9.11"
   }
 }
