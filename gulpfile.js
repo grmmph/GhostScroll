@@ -49,7 +49,7 @@ gulp.task('scripts-production', function() {
 })
 
 gulp.task('build', [ 'sass', 'penthouse', 'scripts' ])
-gulp.task('production', [ 'sass', 'penthouse', 'scripts-dist' ])
+gulp.task('production', [ 'sass', 'penthouse', 'scripts-production' ])
 
 gulp.task('watch', function() {
   gulp.watch('assets/sass/**/*.+(sass|scss)', ['sass', 'penthouse' ])
