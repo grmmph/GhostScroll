@@ -4,11 +4,9 @@
  * Main JS file for GhostScroll behaviours
  */
 
-var $sitehead = $('#site-head');
-
 /* Globals jQuery, document */
 (function ($) {
-	$(document).ready(initialize);
+  initialize();
 	$(window).resize(onViewportChange);
 	$(window).scroll(onViewportChange);
 
@@ -35,6 +33,19 @@ var $sitehead = $('#site-head');
           smoothScroll($(href))
         }
 			});
+
+			$('.fn-item').click(function (evt) {
+        var $this = $(this);
+        var href = $this.attr("href");
+
+        // We don't want to prevent a link from working if it is external.
+        if (href.slice(0,1) === "#") {
+          evt.preventDefault();
+          var title = $this.text();
+          window.history.pushState(title, title, href);
+          smoothScroll($(href))
+        }
+      });
 		}
 
     // TODO: Do this with psuedoclasses in the CSS
@@ -67,6 +78,7 @@ var $sitehead = $('#site-head');
 		}
 	}
 	
+  var $sitehead = $('#site-head');
 	function onViewportChange() {
 		conditionallyShowNav();
 		highlightActiveSection();
