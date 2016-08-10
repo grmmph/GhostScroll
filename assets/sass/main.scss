@@ -232,8 +232,6 @@ h6 {
 a {
     color: inherit;
     transition: all ease 0.3s;
-    -webkit-transition: all ease 0.3s;
-    -moz-transition: all ease 0.3s;
 }
 
 a:hover {
@@ -245,7 +243,6 @@ a.btn {
     text-decoration: none;
     background-color: #9fd067;
     border-radius: 6px;
-    -webkit-border-radius: 6px;
     color: white;
     display: inline-block;
     font-size: 16px;
@@ -277,8 +274,6 @@ a.btn:hover {
     cursor: pointer;
     opacity: 0.6;
     transition: all ease 0.3s;
-    -webkit-transition: all ease 0.3s;
-    -moz-transition: all ease 0.3s;
 }
 #header-arrow:hover {
     opacity: 0.9;
@@ -309,7 +304,6 @@ hr {
 }
 
 blockquote {
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 1.0em 0 1.0em -2.2em;
     padding: 0 0 0 1.0em;
@@ -380,7 +374,6 @@ code, tt {
 }
 
 pre {
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 1.6em 0;
     border: 1px solid #E3EDF3;
@@ -396,7 +389,6 @@ pre {
 
 pre code, tt {
     font-size: inherit;
-    white-space: -moz-pre-wrap;
     white-space: pre-wrap;
     background: transparent;
     border: none;
@@ -420,7 +412,6 @@ kbd {
 }
 
 table {
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 1.6em 0;
     width:100%;
@@ -882,8 +873,6 @@ a.fn-item.active {
         padding-top: 20px;
     }
     #site-head {
-        -webkit-box-sizing: border-box; 
-        -moz-box-sizing: border-box;
         box-sizing: border-box; 
         min-height: 240px;
         padding: 15% 0;

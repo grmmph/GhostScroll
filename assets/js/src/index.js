@@ -4,11 +4,9 @@
  * Main JS file for GhostScroll behaviours
  */
 
-var $sitehead = $('#site-head');
-
 /* Globals jQuery, document */
 (function ($) {
-	$(document).ready(initialize);
+  initialize();
 	$(window).resize(onViewportChange);
 	$(window).scroll(onViewportChange);
 
@@ -18,15 +16,22 @@ var $sitehead = $('#site-head');
 		fontAwesomeReplacement();
 
 		function setupJumpHandlers() {
-      // TODO: replace buttons with user set navigator
-			$('.btn.first, #header-arrow').click( function () {
+			$('#header-arrow').click( function () {
 				var $first = $(".post").first();
 				smoothScroll($first);
 			});
 
-			$('.btn.last').click( function () {
-				var $last = $(".post").last();
-				smoothScroll($last);
+			$('.fn-item, .btn').click(function (evt) {
+        var $this = $(this);
+				var href = $this.attr("href");
+
+        // We don't want to prevent a link from working if it is external.
+        if (href.slice(0,1) === "#") {
+          evt.preventDefault();
+          var title = $this.text();
+          window.history.pushState(title, title, href);
+          smoothScroll($(href))
+        }
 			});
 
 			$('.fn-item').click(function (evt) {
@@ -73,6 +78,7 @@ var $sitehead = $('#site-head');
 		}
 	}
 	
+  var $sitehead = $('#site-head');
 	function onViewportChange() {
 		conditionallyShowNav();
 		highlightActiveSection();
