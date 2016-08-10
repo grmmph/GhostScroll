@@ -16,15 +16,22 @@
 		fontAwesomeReplacement();
 
 		function setupJumpHandlers() {
-      // TODO: replace buttons with user set navigator
-			$('.btn.first, #header-arrow').click( function () {
+			$('#header-arrow').click( function () {
 				var $first = $(".post").first();
 				smoothScroll($first);
 			});
 
-			$('.btn.last').click( function () {
-				var $last = $(".post").last();
-				smoothScroll($last);
+			$('.fn-item, .btn').click(function (evt) {
+        var $this = $(this);
+				var href = $this.attr("href");
+
+        // We don't want to prevent a link from working if it is external.
+        if (href.slice(0,1) === "#") {
+          evt.preventDefault();
+          var title = $this.text();
+          window.history.pushState(title, title, href);
+          smoothScroll($(href))
+        }
 			});
 
 			$('.fn-item').click(function (evt) {
