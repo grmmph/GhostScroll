@@ -4,12 +4,18 @@ var gulp = require('gulp')
 var cssnano = require('cssnano')
 var gulpCssNano = require('gulp-cssnano')
 var sass = require('gulp-sass')
+var autoprefixer = require('gulp-autoprefixer')
 var penthouse = require('penthouse')
 
 gulp.task('sass', function() {
   return gulp.src('assets/sass/*.+(sass|scss)')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulpCssNano())
+    .pipe(sass({
+      outputStyle: 'compressed'
+    }).on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['> 1%']
+    }))
+    // .pipe(gulpCssNano())
     .pipe(gulp.dest('assets/css/'))
 })
 
