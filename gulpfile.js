@@ -6,6 +6,8 @@ var sass = require('gulp-sass')
 var autoprefixer = require('gulp-autoprefixer')
 var penthouse = require('penthouse')
 
+var concat = require('gulp-concat')
+
 gulp.task('sass', function() {
   return gulp.src('assets/sass/*.+(sass|scss)')
     .pipe(sass({
@@ -32,10 +34,17 @@ gulp.task('penthouse', ['sass'], function() {
   })
 })
 
-gulp.task('build', [ 'sass', 'penthouse' ])
+gulp.task('scripts', function() {
+  gulp.src([ 'assets/js/src/jquery-3.1.0.min.js', 'assets/js/src/index.js' ])
+    .pipe(concat('index.min.js'))
+    .pipe(gulp.dest('assets/js/'))
+})
+
+gulp.task('build', [ 'sass', 'penthouse', 'scripts' ])
 
 gulp.task('watch', function() {
-  gulp.watch('assets/sass/**/*.+(sass|scss)', ['sass', 'penthouse'])
+  gulp.watch('assets/sass/**/*.+(sass|scss)', ['sass', 'penthouse' ])
+  gulp.watch('assets/js/src/**/*.js', [ 'scripts' ])
 })
 
 
