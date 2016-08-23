@@ -1,1 +1,4 @@
 node_modules/
+assets/js/index.min.js
+assets/css/main.css
+partials/critical-css.hbs
