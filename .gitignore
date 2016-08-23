@@ -1,4 +1,4 @@
 node_modules/
 assets/js/index.min.js
 assets/css/main.css
-partials/critical_css.hbs
+partials/critical-css.hbs
