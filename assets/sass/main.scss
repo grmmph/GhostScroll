@@ -591,7 +591,7 @@ ul li {
     position: fixed;
     top: 40px;
     left: 2%;
-    z-index: 99999;
+    z-index: 99999 !important;
     font-family: 'Open Sans Condensed', sans-serif;
     text-transform: uppercase;
     font-size: 1.5rem;
@@ -852,11 +852,9 @@ a.fn-item.active {
 
 @media only screen and (max-width: 1130px) {
     .fixed-nav {
-        opacity: 1;
         position: fixed;
         top: 0px;
         left: 0px;
-        z-index: 99999;
         background: #f2efe8;
         width: 100%;
         text-align: center;
