@@ -28,7 +28,7 @@ gulp.task('penthouse', ['sass'], function() {
     height: 568
   }, function(err, critical) {
     if(err) console.error(err)
-    cssnano.process(critical, {}).then(function(result) {
+    cssnano.process(critical, { zindex: false }).then(function(result) {
       var wrappedCritical = "<style>" + result + "</style>"
       fs.writeFile('partials/critical-css.hbs', wrappedCritical)
     })
