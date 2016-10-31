@@ -599,12 +599,6 @@ ul li {
     font-weight: bold;
 
     transition: opacity 0.4s ease-in-out;
-
-    // Workaround for penthouse issue #130
-    // https://github.com/pocketjoso/penthouse/issues/130
-    &:after {
-      z-index: 1;
-    }
 }
 a.fn-item {
     display: block;
