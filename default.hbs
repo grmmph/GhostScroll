@@ -23,13 +23,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{! Styles'n'Scripts }}
-    <link rel="stylesheet" type="text/css" href='{{ asset "css/screen.css" }}' />
+    {{! Asynchronously load CSS with preload (polyfill loadCSS) }}
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Oswald:300|Roboto+Slab:400,300,100,700|Open+Sans:400,700" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="{{asset "css/main.css"}}" as="style" onload="this.rel='stylesheet'">
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+    <noscript>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Oswald:300|Roboto+Slab:400,300,100,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css' rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href='{{asset "css/main.css"}}' />
+    </noscript>
 
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    {{> critical-css}}
 
-    <link rel="stylesheet" href='{{asset "font-awesome/css/font-awesome.min.css"}}'>
+    {{! Prefetch the hero image}}
+    {{#if @blog.cover}}
+    <link rel="prefetch" href="{{@blog.cover}}" />
+    {{/if}}
 
     {{! Ghost outputs important style and meta data with this tag }}
     {{ghost_head}}
@@ -46,16 +56,11 @@
         </div>
     </footer>
 
+    <script type="text/javascript" src='{{asset "js/index.min.js"}}'></script>
+    {{> load-css-polyfill}}
+
     {{! Ghost outputs important scripts and data with this tag }}
     {{ghost_foot}}
-
-    {{! We do need jQuery to be loaded before GhostScroll script }}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    {{! The main JavaScript file for GhostScroll }}
-    <script type="text/javascript" src='{{asset "js/icons.js"}}'></script>
-    <script type="text/javascript" src='{{asset "js/index.js"}}'></script>
-
 
 </body>
 </html>

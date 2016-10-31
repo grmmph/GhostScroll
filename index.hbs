@@ -8,12 +8,16 @@
     <div class="vertical">
         <div id="site-head-content" class="inner">
 
-            {{#if @blog.logo}}<a id="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="Blog Logo" /></a>{{/if}}
-            <h1 class="blog-title">{{@blog.title}}</h1>
+            <a id="blog-logo" href="{{@blog.url}}">
+              {{#if @blog.logo}}
+                <img src="{{@blog.logo}}" alt="Blog Logo" />
+              {{else}}
+                <h1 class="blog-title">{{@blog.title}}</h1>
+              {{/if}}
+            </a>
             <h2 class="blog-description">{{@blog.description}}</h2>
 
-            <a class='btn first'>Take a tour</a>
-            <a class='btn last'>Cut to the chase</a><br>
+            {{navigation}}
             <i id='header-arrow' class="fa fa-angle-down"></i>
         </div>
     </div>
@@ -24,37 +28,29 @@
 <main class="content" role="main">
 
     <div class='fixed-nav'>
+        {{#posts}}
+            <a href="#{{slug}}" class="fn-item">{{title}}</a>
+        {{/posts}}
     </div>
 
-    {{! Each post will be output using this markup }}
-    {{#foreach posts}}
-    <div class='post-holder'>
-        
-            {{#if @first}}
-                <article class="{{post_class}} first">
-            {{else}}
-                {{#if @last}}
-                    <article class="{{post_class}} last">
-                {{else}}
-                    <article class="{{post_class}}">
+    <div id="posts-wrapper">
+        {{#posts}}
+            <div class='post-holder' id="{{slug}}">
+                <article class="{{post_class}}">
+                    <header class="post-header">
+                        <h2 class="post-title">{{{title}}}</h2>
+                    </header>
+
+                    <section class="post-content">
+                        <p>{{content}}</p>
+                    </section>
+                </article>
+
+                {{^if @last}}
+                    <div class='post-after'></div>
                 {{/if}}
-            {{/if}}
-        
-            <header class="post-header">
-                
-                <h2 class="post-title">{{{title}}}</h2>
-
-            </header>
-            <section class="post-content">
-                <p>{{content characters="9999999999999"}}</p>
-            </section>
-        </article>
-        <div class='post-after'></div>
+            </div>
+        {{/posts}}
     </div>
-
-    {{/foreach}}
-
-    {{!! After all the posts, we have the previous/next pagination links }}
-    
-
 </main>
+

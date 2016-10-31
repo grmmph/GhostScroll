@@ -4,26 +4,93 @@
 
 /*
 
-    0.  Includes
-    1.  Icons
-    2.  General
-    3.  Utilities
-    4.  General
-    5.  Single Post
-    6.  Third Party Elements
-    7.  Pagination
-    8.  Footer
-    9.  Media Queries (Tablet)
-    10. Media Queries (Mobile)
+    0. Normalize
+    1. Icons
+    2. General
+    3. Utilities
+    4. General
+    5. Third Party Elements
+    6. Footer
+    7. Media Queries (Tablet)
+    8. Media Queries (Mobile)
 
  */
 
 /* ==========================================================================
-   0. Includes - Ground zero
+   0. normalize.css v3.0.3 | MIT License | git.io/normalize | (minified)
    ========================================================================== */
 
-@import url(normalize.css);
-
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+body { margin: 0; }
+article, aside, details,
+figcaption, figure,
+footer, header,
+main, menu, nav,
+section, summary { display:block; }
+audio, canvas, progress, video {
+    display: inline-block;
+    vertical-align: baseline;
+}
+audio:not([controls]) { display: none; height: 0; }
+[hidden], template { display: none; }
+a { background-color: transparent;}
+a:active, a:hover { outline: 0; }
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: bold; }
+dfn { font-style: italic; }
+h1 { font-size: 2em; margin: 0.67em 0; }
+mark { background: #ff0; color: #000; }
+small { font-size: 80%; }
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+img { border: 0; }
+svg:not(:root) { overflow: hidden; }
+figure { margin: 1em 40px; }
+hr { box-sizing: content-box; height: 0; }
+pre { overflow: auto; }
+code, kbd, pre, samp { font-family: monospace, monospace; font-size: 1em; }
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+button { overflow: visible; }
+button, select { text-transform: none; }
+button, html input[type="button"],
+input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+button[disabled], html input[disabled] { cursor: default; }
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+input { line-height: normal; }
+input[type="checkbox"],
+input[type="radio"] { box-sizing: border-box; padding: 0; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { height: auto; }
+input[type="search"] { -webkit-appearance: textfield; }
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+legend { border: 0; padding: 0; }
+textarea { overflow: auto; }
+optgroup { font-weight: bold; }
+table{ border-collapse: collapse; border-spacing: 0; }
+td, th{ padding: 0; }
 
 /* ==========================================================================
    1. Icons - Sets up the icon font and respective classes
@@ -88,7 +155,6 @@ html {
 body {
     height: 100%;
     max-height: 100%;
-    /*font-family: 'Droid Serif', serif;*/
     font-family: 'Roboto Slab', serif;
     font-size: 2.0rem;
     line-height: 1.6em;
@@ -166,8 +232,6 @@ h6 {
 a {
     color: inherit;
     transition: all ease 0.3s;
-    -webkit-transition: all ease 0.3s;
-    -moz-transition: all ease 0.3s;
 }
 
 a:hover {
@@ -179,7 +243,6 @@ a.btn {
     text-decoration: none;
     background-color: #9fd067;
     border-radius: 6px;
-    -webkit-border-radius: 6px;
     color: white;
     display: inline-block;
     font-size: 16px;
@@ -211,8 +274,6 @@ a.btn:hover {
     cursor: pointer;
     opacity: 0.6;
     transition: all ease 0.3s;
-    -webkit-transition: all ease 0.3s;
-    -moz-transition: all ease 0.3s;
 }
 #header-arrow:hover {
     opacity: 0.9;
@@ -243,7 +304,6 @@ hr {
 }
 
 blockquote {
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 1.0em 0 1.0em -2.2em;
     padding: 0 0 0 1.0em;
@@ -314,7 +374,6 @@ code, tt {
 }
 
 pre {
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 1.6em 0;
     border: 1px solid #E3EDF3;
@@ -330,7 +389,6 @@ pre {
 
 pre code, tt {
     font-size: inherit;
-    white-space: -moz-pre-wrap;
     white-space: pre-wrap;
     background: transparent;
     border: none;
@@ -354,7 +412,6 @@ kbd {
 }
 
 table {
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 1.6em 0;
     width:100%;
@@ -502,7 +559,7 @@ ul li {
     background: #f2efe8;
     position: relative;
 }
-.post-holder.odd {
+.post-holder:nth-of-type(odd) {
     background: #0099cc;
     color: white;
 }
@@ -518,29 +575,36 @@ ul li {
     height: 70%;
     word-break: break-word;
     hyphens: auto;
+}
 
+.post img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Add a little circle in the middle of the border-bottom on our .post
    just for the lolz and stylepoints. */
 
 .fixed-nav {
-    display: none;
-    opacity: 1;
+    opacity: 0;
     position: fixed;
     top: 40px;
     left: 2%;
-    z-index: 99999;
+    z-index: 2;
     font-family: 'Open Sans Condensed', sans-serif;
     text-transform: uppercase;
     font-size: 1.5rem;
     line-height: 130%;
     font-weight: bold;
+
+    transition: opacity 0.4s ease-in-out;
 }
 a.fn-item {
     display: block;
     cursor: pointer;
     opacity: 0.7;
+    text-decoration: none;
 }
 .white {
     color: white;
@@ -563,11 +627,12 @@ a.fn-item.active {
     height: 0; 
     border-left: 60px solid transparent;
     border-right: 60px solid transparent;
-    border-top: 50px solid #f2efe8;
+    border-top: 50px solid #0099cc;
     border-radius: 25px;
 }
-.post-after.even {
+.post-holder:nth-child(even) > .post-after {
     left: 6%;
+    border-top-color: #f2efe8;
 }
 
 .post-title {
@@ -644,83 +709,10 @@ a.fn-item.active {
     line-height: 1.5em;
 }
 
-/* ==========================================================================
-   5. Single Post - When you click on an individual post
-   ========================================================================== */
-
-/* Tweak the .post wrapper style */
-.post-template .post {
-    margin-top: 0;
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-/* Kill that stylish little circle that was on the border, too */
-.post-template .post:after {
-    display: none;
-}
-
-/* Insert some mad padding up in the header for better spacing */
-.post-template .post-header {
-    padding: 60px 0;
-}
-
-/* Keep large images within the bounds of the post-width */
-.post-content img {
-    display: block;
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-/* The author credit area after the post */
-.post-footer {
-    position: relative;
-    margin: 4rem 0 0 0;
-    padding: 4rem 0 0 0;
-    border-top: #EBF2F6 1px solid;
-}
-
-.post-footer h4 {
-    font-size: 1.8rem;
-    margin: 0;
-}
-
-.post-footer p {
-    margin: 1rem 0;
-    font-size: 1.4rem;
-    line-height: 1.6em;
-}
-
-/* Create some space to the right for the share links */
-.post-footer .author {
-    margin-right: 180px;
-}
-
-/* Drop the share links in the space to the right.
-   Doing it like this means it's easier for the author bio
-   to be flexible at smaller screen sizes while the share
-   links remain at a fixed width the whole time */
-.post-footer .share {
-    position: absolute;
-    top: 4rem;
-    right: 0;
-    width: 140px;
-}
-
-.post-footer .share a {
-    font-size: 1.8rem;
-    display: inline-block;
-    margin: 1.4rem 1.6rem 1.6rem 0;
-    color: #BBC7CC;
-}
-
-.post-footer .share a:hover {
-    color: #50585D;
-}
 
 
 /* ==========================================================================
-   6. Third Party Elements - Embeds from other services
+   5. Third Party Elements - Embeds from other services
    ========================================================================== */
 
 /* Github */
@@ -736,59 +728,9 @@ a.fn-item.active {
 }
 
 
-/* ==========================================================================
-   7. Pagination - Tools to let you flick between pages
-   ========================================================================== */
-
-/* The main wrapper for our pagination links */
-.pagination {
-    position: relative;
-    width: 80%;
-    max-width: 700px;
-    margin: 4rem auto;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.3rem;
-    color: #9EABB3;
-    text-align: center;
-}
-
-.pagination a {
-    color: #9EABB3;
-}
-
-/* Push the previous/next links out to the left/right */
-.older-posts,
-.newer-posts {
-    position: absolute;
-    display: inline-block;
-    padding: 0 15px;
-    border: #EBF2F6 2px solid;
-    text-decoration: none;
-    border-radius: 30px;
-    transition: border ease 0.3s;
-}
-
-.older-posts {
-    right: 0;
-}
-
-.page-number {
-    display: inline-block;
-    padding: 2px 0;
-}
-
-.newer-posts {
-    left: 0;
-}
-
-.older-posts:hover,
-.newer-posts:hover {
-    border-color: #9EABB3;
-}
-
 
 /* ==========================================================================
-   8. Footer - The bottom of every page
+   6. Footer - The bottom of every page
    ========================================================================== */
 
 .site-footer {
@@ -905,16 +847,14 @@ a.fn-item.active {
 
 
 /* ==========================================================================
-   9. Media Queries - Smaller than 1130px
+   7. Media Queries - Smaller than 1130px
    ========================================================================== */
 
 @media only screen and (max-width: 1130px) {
     .fixed-nav {
-        opacity: 1;
         position: fixed;
         top: 0px;
         left: 0px;
-        z-index: 99999;
         background: #f2efe8;
         width: 100%;
         text-align: center;
@@ -931,8 +871,6 @@ a.fn-item.active {
         padding-top: 20px;
     }
     #site-head {
-        -webkit-box-sizing: border-box; 
-        -moz-box-sizing: border-box;
         box-sizing: border-box; 
         min-height: 240px;
         padding: 15% 0;
@@ -984,7 +922,7 @@ a.fn-item.active {
 }
 
 /* ==========================================================================
-   10. Media Queries - Smaller than 500px
+   8. Media Queries - Smaller than 500px
    ========================================================================== */
 
 
